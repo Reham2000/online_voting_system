@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Alkatra&family=Poppins:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+body {
+    overflow: scroll;
+    font-family: 'Courgette', cursive;
+}
+.signupLogo{
+    background-image: url(../images/vote.jpg);
+    background-size: cover;
+}
+.updateLogo{
+    background-image: url(../images/undraw_Social_update_re_xhjr.png);
+    background-size: cover;
+}
+.font2{
+    font-family: 'Alkatra', cursive;
+}
+.fs-8{
+    font-size: 3rem;
+}
+.bg-img{
+    background-image: url(../images/undraw_voting_nvu7.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.profile-img img{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
