@@ -2,7 +2,7 @@
 
 namespace App\Database\Models;
 
-use Crud;
+use App\Database\Models\Crud;
 use App\Database\Models\Model;
 
 
@@ -12,21 +12,63 @@ class Vote extends Model implements Crud
 
     public function create()
     {
-
+        $query = "INSERT INTO `ask-vote` (title,description,image,user_id,created_at,updated_at) VALUES(?,?,?,?,?,?)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("sssiss",$this->title,$this->description,$this->image,$this->user_id,$this->created_at,$this->updated_at);
+        return $stmt->execute();
     }
     public function read()
     {
-
+        $query = "SELECT * FROM `ask-vote`";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->get_result();
     }
     public function update()
     {
-
+        $query = "UPDATE `ask-vote` SET `title` = ?,`description` = ?,`image` = ? WHERE `id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('sssi',$this->title,$this->description,$this->image,$this->id);
+        return $stmt->execute();
     }
     public function delete()
     {
 
     }
-
+    public function getVoteById()
+    {
+        $query = "SELECT * FROM `ask-vote` WHERE `id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i',$this->id);
+        $stmt->execute();
+        return $stmt->get_result();
+        
+    }
+    public function getAllVotesByUserId()
+    {
+        $query = "SELECT * FROM `ask-vote` WHERE `user_id` = ? ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i',$this->user_id);
+        $stmt->execute();
+        return $stmt->get_result();
+        
+    }
+    public function likes()
+    {
+        $this->like = ++$this->like;
+        $query = "UPDATE `ask-vote` SET `like` = ? WHERE `id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('ii',$this->like,$this->id);
+        return $stmt->execute();
+    }
+    public function dislikes()
+    {
+        $this->dislike = ++$this->dislike;
+        $query = "UPDATE `ask-vote` SET `dislike` = ? WHERE `id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('ii',$this->dislike,$this->id);
+        return $stmt->execute();
+    }
     /**
      * Get the value of id
      */ 
@@ -205,5 +247,12 @@ class Vote extends Model implements Crud
         $this->updated_at = $updated_at;
 
         return $this;
+    }
+    public function updateImage()
+    {
+        $query = "UPDATE `ask-vote` SET image = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('si',$this->image,$this->id);
+        return $stmt->execute();
     }
 }

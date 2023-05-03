@@ -30,6 +30,23 @@ class User extends Model implements Crud
     {
 
     }
+    public function getUerByUsername()
+    {
+        $query = "SELECT * FROM `users` WHERE `username` = ? ";
+        $stmt =$this->conn->prepare($query);
+        $stmt->bind_param('s',$this->username);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+    public function updateColumn($column,$value)
+    {
+        $query = "UPDATE `users` SET {$column} = ? WHERE `id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('si',$value,$this->id);
+        $stmt->execute();
+        
+        return $stmt->get_result();
+    }
 
 
     /**

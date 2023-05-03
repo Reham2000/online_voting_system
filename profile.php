@@ -1,6 +1,17 @@
 <?php
+
+use App\Database\Models\Vote;
+
 include "templates/header.php";
+include "App/Http/Middlewares/Auth.php";
 include "templates/navbar.php";
+
+if(empty($_SESSION['user']->photo))
+{
+    $_SESSION['user']->photo = "default.png";
+}
+$vote = new Vote;
+$votes = $vote->setUser_id($_SESSION['user']->id)->getAllVotesByUserId()->fetch_all();
 
 ?>
 
@@ -8,90 +19,40 @@ include "templates/navbar.php";
     <div class="row">
         <div class="col-md-3 col-sm-8 shadow px-3 text-center py-5 position-fixed vh-100">
             <div class="profile-img d-flex justify-content-center mt-5">
-                <img src="layouts/images/person1.jpg" alt="women" class="shadow">
+                <img draggable=false src="layouts/images/users/<?= $_SESSION['user']->photo ?>"alt="women" class="shadow">
             </div>
-            <h3 class="fw-bolder text-center pt-3">UserName</h3>
-            <h6 class="fw-bold text-center pt-1 text-muted">01525478965</h6>
+            <h3 class="fw-bolder text-center pt-3"><?= $_SESSION['user']->username ?></h3>
+            <h6 class="fw-bold text-center pt-1 text-muted"><?= $_SESSION['user']->phone ?></h6>
             
             <a href="update-profile.php" class="btn btn-outline-dark my-3">Update Profile</a>
         </div>
         <div class="col-md-8 col-sm-12 mb-5 p-3 py-5 ms-auto shadow">
         <div class="row row-cols-1 row-cols-md-2 g-4">
+            <?php
+                //print_r($votes);die;
+                foreach($votes as $singleVote){
+                    $singleVote[2] = str_split($singleVote[2],60);
+                    $singleVote[7] = explode(' ',$singleVote[7]);
+                    $singleVote[7] = $singleVote[7][0];
+                    $singleVote[8] = explode(' ',$singleVote[8]);
+                    $singleVote[8] = $singleVote[8][0];
+            ?>
                 <div class="col-lg-6 col-sm-12">
                     <div class="card">
-                        <img src="layouts/images/vote.jpg" class="card-img-top" alt="...">
+                        <img src="layouts/images/votes/<?= $singleVote[3] ?>" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below <a
-                                    href="details.php">More..</a></p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            <p class="float-end fs-6">100 <i class="far fa-thumbs-up  text-primary"></i> 50 <i
+                            <h5 class="card-title"><?= $singleVote[1] ?></h5>
+                            <p class="card-text"><?= $singleVote[2][0] ?> <a
+                                    href="details.php?id=<?= $singleVote[0] ?>">More..</a></p>
+                                    <p class="card-text"><small class="text-muted"><?= empty($singleVote[8]) ? "Created at ". $singleVote[7]  : "Last updated ".$singleVote[8] ?></small></p>
+                            <p class="float-end fs-6"><?= $singleVote[4] ?> <i class="far fa-thumbs-up  text-primary"></i> <?= $singleVote[5] ?> <i
                                     class="far fa-thumbs-down text-danger"></i></p>
-                            <a href="index.php?get=like" class="btn btn-primary mt-2">Like</a>
-                            <a href="index.php?get=dislike" class="btn btn-danger mt-2">Dislike</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-12">
-                    <div class="card">
-                        <img src="layouts/images/vote.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below <a
-                                    href="details.php">More..</a></p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            <p class="float-end fs-6">100 <i class="far fa-thumbs-up  text-primary"></i> 50 <i
-                                    class="far fa-thumbs-down text-danger"></i></p>
-                            <a href="index.php?get=like" class="btn btn-primary mt-2">Like</a>
-                            <a href="index.php?get=dislike" class="btn btn-danger mt-2">Dislike</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-sm-12">
-                    <div class="card">
-                        <img src="layouts/images/vote.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below <a
-                                    href="details.php">More..</a></p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            <p class="float-end fs-6">100 <i class="far fa-thumbs-up  text-primary"></i> 50 <i
-                                    class="far fa-thumbs-down text-danger"></i></p>
-                            <a href="index.php?get=like" class="btn btn-primary mt-2">Like</a>
-                            <a href="index.php?get=dislike" class="btn btn-danger mt-2">Dislike</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-sm-12">
-                    <div class="card">
-                        <img src="layouts/images/vote.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below <a
-                                    href="details.php">More..</a></p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            <p class="float-end fs-6">100 <i class="far fa-thumbs-up  text-primary"></i> 50 <i
-                                    class="far fa-thumbs-down text-danger"></i></p>
-                            <a href="index.php?get=like" class="btn btn-primary mt-2">Like</a>
-                            <a href="index.php?get=dislike" class="btn btn-danger mt-2">Dislike</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-sm-12">
-                    <div class="card">
-                        <img src="layouts/images/vote.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below <a
-                                    href="details.php">More..</a></p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            <p class="float-end fs-6">100 <i class="far fa-thumbs-up  text-primary"></i> 50 <i
-                                    class="far fa-thumbs-down text-danger"></i></p>
-                            <a href="index.php?get=like" class="btn btn-primary mt-2">Like</a>
-                            <a href="index.php?get=dislike" class="btn btn-danger mt-2">Dislike</a>
-                        </div>
-                    </div>
-                </div>
+
+            <?php } ?>
+                
             </div>
         </div>
 
@@ -100,4 +61,5 @@ include "templates/navbar.php";
 
 
 <?php
+
 include "templates/footer.php";

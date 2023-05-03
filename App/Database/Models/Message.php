@@ -2,7 +2,7 @@
 
 namespace App\Database\Models;
 
-use Crud;
+use App\Database\Models\Crud;
 use App\Database\Models\Model;
 
 
@@ -12,11 +12,18 @@ class Message extends Model implements Crud
 
     public function create()
     {
-
+        $query = "INSERT INTO `messages` (title,message,user_id) VALUES (?,?,?)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('ssi',$this->title,$this->message,$this->user_id);
+        return $stmt->execute();
     }
     public function read()
     {
-
+        $query = "SELECT * FROM `messages` WHERE `user_id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i',$this->user_id);
+        $stmt->execute();
+        return $stmt->get_result();
     }
     public function update()
     {
@@ -24,7 +31,19 @@ class Message extends Model implements Crud
     }
     public function delete()
     {
-
+        $query = "DELETE FROM `messages` WHERE `id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i',$this->id);
+        return $stmt->execute();
+    }
+    public function getMessageById()
+    {
+        $query = "SELECT * FROM `messages` WHERE `id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i',$this->id);
+        $stmt->execute();
+        return $stmt->get_result();
+        
     }
 
     /**

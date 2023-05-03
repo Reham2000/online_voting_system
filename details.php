@@ -1,6 +1,17 @@
-<?php 
+<?php
+
+use App\Database\Models\Vote;
+
 include "templates/header.php";
 include "templates/navbar.php";
+
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $vote = new Vote;
+    $voteDate = $vote->setId($_GET['id'])->getVoteById()->fetch_object();
+} else {
+    header("location:index.php");
+    die;
+}
 
 ?>
 
@@ -23,20 +34,39 @@ include "templates/navbar.php";
                     </div>
                 </div>
             </div> -->
+            <?php //print_r($voteDate);die; 
+            ?>
             <div class="col-12 row my-5 vh-100">
                 <div class="col-4 h-100">
-                    <img src="layouts/images/vote.jpg" alt="" class="w-100 h-100">
+                    <img src="layouts/images/votes/<?= $voteDate->image ?>" alt="" class="w-100 h-100">
                 </div>
                 <div class="col-8 p-5">
-                    <h2 class="card-title my-3">Card title</h2>
-                    <p class="card-text">A book is a medium for recording information in the form of writing or images, typically composed of many pages (made of papyrus, parchment, vellum, or paper) bound together and protected by a cover.[1] The technical term for this physical arrangement is codex (plural, codices). In the history of hand-held physical supports for extended written compositions or records, the codex replaces its predecessor, the scroll. A single sheet in a codex is a leaf and each side of a leaf is a page.
+                    <h2 class="card-title my-3"><?= $voteDate->title ?></h2>
+                    <p class="card-text"><?= $voteDate->description ?></p>
+                    <p class="card-text"><small class="text-muted">
+                            <?php
+                            if ($voteDate->updated_at == "") {
+                                echo "Created at " . $voteDate->created_at;
+                            } else {
+                                echo "Last update at " . $voteDate->updated_at;
+                            }
+                            ?>
+                        </small></p>
+                    <p class="float-end fs-4"><?= $voteDate->like ?> <i class="far fa-thumbs-up  text-primary mx-2"></i>
+                        <?= $voteDate->dislike ?> <i class="far fa-thumbs-down text-danger mx-2"></i></p>
+                    <?php
+                    if (isset($_SESSION['user']) && $_SESSION['user']->id != $voteDate->user_id) { ?>
+                        <a href="index.php?get=like" class="btn btn-primary mt-2">Like</a>
+                        <a href="index.php?get=dislike" class="btn btn-danger mt-2">Dislike</a>
 
-As an intellectual object, a book is prototypically a composition of such great length that it takes a considerable investment of time to compose and still considered as an investment of time to read. In a restricted sense, a book is a self-sufficient section or</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    <p class="float-end fs-4">100 <i class="far fa-thumbs-up  text-primary"></i> 50 <i
-                            class="far fa-thumbs-down text-danger"></i></p>
-                    <a href="index.php?get=like" class="btn btn-primary mt-2">Like</a>
-                    <a href="index.php?get=dislike" class="btn btn-danger mt-2">Dislike</a>
+                    <?php    }elseif(isset($_SESSION['user']) && $_SESSION['user']->id != $voteDate->user_id){ ?>
+                        <a href="makeVote.php?vote=<?= $voteDate->id ?>" class="btn btn-outline-dark  mt-2">Update</a>
+
+                    <?php }else{ ?>
+                        <a href="login.php" class="btn btn-primary mt-2">Like</a>
+                        <a href="login.php" class="btn btn-danger mt-2">Dislike</a>
+                    <?php }
+                    ?>
                 </div>
             </div>
         </div>
@@ -46,5 +76,6 @@ As an intellectual object, a book is prototypically a composition of such great 
 
 
 <?php
+
 
 include "templates/footer.php";
