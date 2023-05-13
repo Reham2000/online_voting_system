@@ -168,8 +168,6 @@ class Validation
     }
     public function isChanged($oldValue)
     {
-        echo $oldValue;
-        echo $this->value;
         if($this->value == $oldValue)
         {
             $this->changed = 0;

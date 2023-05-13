@@ -33,7 +33,10 @@ class Vote extends Model implements Crud
     }
     public function delete()
     {
-
+        $query = "DELETE FROM `ask-vote` WHERE `id` = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i',$this->id);
+        return $stmt->execute();
     }
     public function getVoteById()
     {

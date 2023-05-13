@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $vote = new Vote;
                 $vote->setTitle($_POST['title'])->setDescription($_POST['description'])->setUser_id($_SESSION['user']->id)->setImage($imageService->getFileName());
                 if ($vote->create()) {
-                    header("refresh: 5 ;url=profile.php");
+                    header("location:profile.php");
                     die;
                 } else {
                     $error = "<div class='alert alert-danger text-center fw-bold fs-4 p-0' role='alert'>Something Went Rong</div>";
@@ -32,9 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
     }
 }
-if(isset($_GET['vote']) && is_numeric($_GET['vote'])){
-    $main = "Update";
-}
+
 
 ?>
 

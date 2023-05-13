@@ -30,7 +30,7 @@ class User extends Model implements Crud
     {
 
     }
-    public function getUerByUsername()
+    public function getUserByUsername()
     {
         $query = "SELECT * FROM `users` WHERE `username` = ? ";
         $stmt =$this->conn->prepare($query);
@@ -38,15 +38,22 @@ class User extends Model implements Crud
         $stmt->execute();
         return $stmt->get_result();
     }
-    public function updateColumn($column,$value)
+    public function getUserById()
+    {
+        $query = "SELECT * FROM `users` WHERE `id` = ? ";
+        $stmt =$this->conn->prepare($query);
+        $stmt->bind_param('i',$this->id);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+    public function updateColumn($column ,$value)
     {
         $query = "UPDATE `users` SET {$column} = ? WHERE `id` = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param('si',$value,$this->id);
         $stmt->execute();
-        
         return $stmt->get_result();
-    }
+    } 
 
 
     /**

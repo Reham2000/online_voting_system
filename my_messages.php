@@ -30,7 +30,7 @@ if(isset($_GET['delete']) && is_numeric($_GET['delete']))
             if(empty($messages)){
 ?>
     <div class="alert alert-danger" role="alert">
-        No Messages You Send To Show Here 
+    <i class="fas fa-exclamation-triangle mx-3"></i> No Messages You Send To Show Here 
     </div>
 <?php
             }else{
@@ -47,7 +47,7 @@ if(isset($_GET['delete']) && is_numeric($_GET['delete']))
                 <?php
                 if($messageDate[4] == '')
                 {?>
-                <p class="card-text text-danger ms-3">No Replay</p>
+                <p class="card-text shadow p-3 fs-5 text-danger ms-3">No Replay</p>
                 <?php
                 }else{ ?>
                 <p class="fw-bold fst-italic ">Replay: </p>

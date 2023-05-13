@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use App\Database\Models\User;
 use App\Http\Requests\Validation;
@@ -9,21 +9,21 @@ include "templates/navbar.php";
 
 $validation = new Validation;
 
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-    $validation->setInput('username')->setValue($_POST['username'])->required()->exists('users','username');
-    $validation->setInput('password')->setValue($_POST['password'])->required()->regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,32}$/',"Wrong Email Or Password");
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $validation->setInput('username')->setValue($_POST['username'])->required()->exists('users', 'username');
+    $validation->setInput('password')->setValue($_POST['password'])->required()->regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,32}$/', "Wrong Email Or Password");
 
-    if(empty($validation->getErrors()))
-    {
+    if (empty($validation->getErrors())) {
         $user = new User;
-        $result = $user->setUsername($_POST['username'])->getUerByUsername()->fetch_object();
-        if(password_verify($_POST['password'],$result->password))
-        {
+        $result = $user->setUsername($_POST['username'])->getUserByUsername()->fetch_object();
+        if (password_verify($_POST['password'], $result->password)) {
             $_SESSION['user'] = $result;
-            header("location:index.php");die;
-        }else
-        {
+            // if (is_null($_SESSION['user']->photo)) {
+            //     $_SESSION['user']->photo == "default.png";
+            // }
+            header("location:index.php");
+            die;
+        } else {
             $error = "<div class='alert alert-danger text-center fw-bold fs-4 p-0' role='alert'>Something Went Rong</div>";
         }
     }
@@ -38,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             <div class="col-md-6 col-sm-12 signupLogo h-50">
             </div>
             <form action="" method="POST" class="col-md-6 col-sm-12 p-3 ">
-            <h2 class="text-center col-12 pt-5  pb-3">Login</h2>
+                <h2 class="text-center col-12 pt-5  pb-3">Login</h2>
                 <div class="col-12 form-group mb-3">
                     <input class="form-control" name="username" value="<?= $validation->getOldValue('username') ?>" type="text" placeholder="Enter Your Username...">
                     <?= $validation->getMessage('username') ?>
@@ -64,5 +64,3 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 
 include "templates/footer.php";
-
-
