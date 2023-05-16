@@ -11,6 +11,7 @@ class Validation
     private array $errors = [];
     private array $oldValues = [];
     private $changed;
+    private $roleError;
 
 
     /**
@@ -179,6 +180,26 @@ class Validation
     }
 
     
+
+    /**
+     * Get the value of roleError
+     */ 
+    // public function getRoleError()
+    // {
+    //     return $this->roleError;
+    // }
+
+    /**
+     * Set the value of roleError
+     *
+     * @return  self
+     */ 
+    // public function setRoleError($roleError)
+    // {
+    //     $this->roleError = $roleError;
+
+    //     return $this;
+    // }
 }
 
 

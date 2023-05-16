@@ -17,10 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = new User;
         $result = $user->setUsername($_POST['username'])->getUserByUsername()->fetch_object();
         if (password_verify($_POST['password'], $result->password)) {
+            $validation->setInput('status')->setvalue($result->id)->exists('users_votes','user_id');
+            if(empty($validation->getErrors())){
+                $user->setId($result->id)->updateColumn('status',0);
+            }
             $_SESSION['user'] = $result;
-            // if (is_null($_SESSION['user']->photo)) {
-            //     $_SESSION['user']->photo == "default.png";
-            // }
             header("location:index.php");
             die;
         } else {
