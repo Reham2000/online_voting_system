@@ -3,3 +3,7 @@ body {
   /* overflow: scroll; */
   font-family: 'Courgette', cursive;
 }
+.userImg{
+  max-width: 100px !important;
+  max-height: 100px !important;
+}

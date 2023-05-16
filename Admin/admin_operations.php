@@ -1,7 +1,9 @@
 <?php
 include "includes/header.php";
+include "App/Http/Middlewares/Auth.php";
 include "includes/navbar.php";
 include "includes/sidebar.php";
+include "App/Http/Middlewares/superAdmin.php";
 
 use App\Database\Models\Admin;
 use App\Http\Requests\Validation;

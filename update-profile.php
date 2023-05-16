@@ -39,7 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $imageService->setFile($_FILES['photo'])->size(1024 * 1024)->extension(['png', 'jpg', 'jpeg']);
                 if (empty($imageService->getErrors()) && empty($validation->getErrors())) {
                     $imageService->upload('layouts/images/users/');
-                    $imageService->delete("layouts/images/users/{$_SESSION['user']->photo}");
+                    if($_SESSION['user']->photo != 'default.png'){
+                        $imageService->delete("layouts/images/users/{$_SESSION['user']->photo}");
+                    }
                     $user->setId($_SESSION['user']->id)->setPhoto($imageService->getFileName())->updateColumn('photo', $imageService->getFileName());
                     $_SESSION['user'] = $user->setId($_SESSION['user']->id)->getUserById()->fetch_object();
                     $_SESSION['user']->photo = $imageService->getFileName();
@@ -60,9 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
     }
 
-    // $phone = $validation->setInput('phone')->setValue($_POST['phone'])->isChanged($_SESSION['user']->phone);
-    // $password = $validation->setInput('password')->setValue($_POST['password'])->isChanged($_SESSION['user']->password);
-    // $image = $validation->setInput('image')->setValue($_FILES['image']['name'])->isChanged($_SESSION['user']->photo);
 }
 ?>
 

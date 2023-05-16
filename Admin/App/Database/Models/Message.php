@@ -36,9 +36,9 @@ class Message extends Model implements Crud
   }
   public function reply()
   {
-    $query = "UPDATE `messages` SET `reply` = ? WHERE `id` = ?";
+    $query = "UPDATE `messages` SET `reply` = ?, `reply_at` = ?,`admin_id` = ? WHERE `id` = ?";
     $stmt = $this->conn->prepare($query);
-    $stmt->bind_param('si',$this->reply,$this->id);
+    $stmt->bind_param('ssii',$this->reply,$this->reply_at,$this->admin_id,$this->id);
     $stmt->execute();
     return $stmt->get_result();
   }

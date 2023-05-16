@@ -1,6 +1,7 @@
 <?php
 
 include "includes/header.php";
+include "App/Http/Middlewares/Auth.php";
 include "includes/navbar.php";
 include "includes/sidebar.php";
 

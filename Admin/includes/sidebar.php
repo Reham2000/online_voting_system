@@ -15,7 +15,7 @@
         <img src="images/admin.png" class="img-circle elevation-2 h-100" alt="User Image" />
       </div>
       <div class="info">
-        <a href="profile.php" class="d-block">Username</a>
+        <a href="profile.php" class="d-block"><?= $_SESSION['admin']->username ?></a>
       </div>
     </div>
 
@@ -52,12 +52,14 @@
                 <p>All Admins</p>
               </a>
             </li>
+            <?php if($_SESSION['admin']->role == 1){ ?>
             <li class="nav-item">
               <a href="admin_operations.php" class="nav-link">
                 <i class="fas fa-user-plus nav-icon"></i>
                 <p>Add Admin</p>
               </a>
             </li>
+            <?php } ?>
           </ul>
         </li>
         <li class="nav-item">
@@ -75,12 +77,14 @@
                 <p>All Users</p>
               </a>
             </li>
+            <?php if($_SESSION['admin']->role == 1){ ?>
             <li class="nav-item">
               <a href="user_operations.php" class="nav-link">
                 <i class="fas fa-user-plus nav-icon"></i>
                 <p>Add User</p>
               </a>
             </li>
+            <?php } ?>
           </ul>
         </li>
         <li class="nav-header">EXAMPLES</li>

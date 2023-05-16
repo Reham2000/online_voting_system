@@ -1,4 +1,4 @@
 <?php
-if( isset($_SESSION['user'])){
+if( isset($_SESSION['admin'])){
     header('location:index.php');die;
 }

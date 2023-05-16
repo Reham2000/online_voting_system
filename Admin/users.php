@@ -1,5 +1,6 @@
 <?php
 include "includes/header.php";
+include "App/Http/Middlewares/Auth.php";
 include "includes/navbar.php";
 include "includes/sidebar.php";
 
@@ -68,7 +69,7 @@ $users = $user->read()->fetch_all();
                           <td><?= $userData[0] ?></td>
                           <td><?= $userData[1] ?></td>
                           <td>0<?= $userData[2] ?></td>
-                          <td><img src="../layouts/images/users/<?= $userData[4] ?? 'default.png' ?>" alt="<?= $userData[1] ?>" class="w-25 rounded-circle"></td>
+                          <td><img src="../layouts/images/users/<?= $userData[4]?>" alt="<?= $userData[1] ?>" class="w-25 h-25 rounded-circle"></td>
                           <td>
                             <?php
                             if($userData[5] == 1){echo "Active";}
