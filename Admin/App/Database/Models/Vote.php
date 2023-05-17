@@ -31,7 +31,13 @@ class Vote extends Model implements Crud
     $stmt->bind_param('i',$this->id);
     return $stmt->execute();
   }
-
+  public function statistics()
+  {
+    $query = "SELECT `id`,`like`,`dislike`,MONTHNAME(`created_at`) AS `date` FROM `ask-vote` ORDER BY RAND() limit 7";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->get_result();
+  }
   /**
      * Get the value of id
      */

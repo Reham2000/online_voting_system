@@ -37,6 +37,13 @@ class Admin extends Model implements Crud
     $stmt->bind_param('i',$this->id);
     return $stmt->execute();
   }
+  // public function adminsNum()
+  // {
+  //   $query = "SELECT * FROM `admins`";
+  //   $stmt = $this->conn->prepare($query);
+  //   $stmt->execute();
+  //   return $stmt->get_result();
+  // }
   public function ChangePassword()
   {
     $query = "UPDATE `admins` SET `username` = ? ,`password` = ? ,`role` = ?  WHERE `id` = ?";

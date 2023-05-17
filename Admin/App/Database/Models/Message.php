@@ -34,11 +34,33 @@ class Message extends Model implements Crud
     $stmt->bind_param('i',$this->id);
     return $stmt->execute();
   }
+  public function getMyMessages()
+  {
+    $query = "SELECT * FROM `messages` WHERE `admin_id` = ?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param('i',$this->admin_id);
+    $stmt->execute();
+    return $stmt->get_result();
+  }
   public function reply()
   {
     $query = "UPDATE `messages` SET `reply` = ?, `reply_at` = ?,`admin_id` = ? WHERE `id` = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param('ssii',$this->reply,$this->reply_at,$this->admin_id,$this->id);
+    $stmt->execute();
+    return $stmt->get_result();
+  }
+  public function repliedNum()
+  {
+    $query = "SELECT count(*) FROM `messages` WHERE `reply` is NOT null";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->get_result();
+  }
+  public function notRepliedNum()
+  {
+    $query = "SELECT count(*) FROM `messages` WHERE `reply` is null";
+    $stmt = $this->conn->prepare($query);
     $stmt->execute();
     return $stmt->get_result();
   }

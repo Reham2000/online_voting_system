@@ -101,7 +101,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="messages.php" class="nav-link">
+          <a href="statistics.php" class="nav-link">
             <i class="fas fa-chart-pie nav-icon"></i>
             <p>Statistics</p>
           </a>

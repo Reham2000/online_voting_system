@@ -44,7 +44,20 @@ class User extends Model implements Crud
     $stmt->execute();
     return $stmt->get_result();
   }
-
+  public function activeNum()
+  {
+    $query = "SELECT COUNT(*) FROM `users` WHERE `status` = 1";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->get_result();
+  }
+  public function NotActiveNum()
+  {
+    $query = "SELECT COUNT(*) FROM `users` WHERE `status` = 0";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->get_result();
+  }
   /**
    * Get the value of id
    */

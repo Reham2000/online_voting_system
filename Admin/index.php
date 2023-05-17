@@ -5,6 +5,15 @@ include "App/Http/Middlewares/Auth.php";
 include "includes/navbar.php";
 include "includes/sidebar.php";
 
+use App\Database\Models\User;
+use App\Database\Models\Vote;
+use App\Database\Models\Admin;
+use App\Database\Models\Message;
+
+$admin = new Admin;
+$user = new User;
+$vote = new Vote;
+$message = new Message;
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -19,7 +28,7 @@ include "includes/sidebar.php";
         <!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
             <li class="breadcrumb-item active">Dashboard</li>
           </ol>
         </div>
@@ -40,7 +49,7 @@ include "includes/sidebar.php";
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>150</h3>
+              <h3><?=$admin->read()->num_rows ?></h3>
 
               <p>Admins</p>
             </div>
@@ -55,7 +64,7 @@ include "includes/sidebar.php";
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>53</h3>
+              <h3><?=$user->read()->num_rows ?></h3>
 
               <p>Users</p>
             </div>
@@ -70,7 +79,7 @@ include "includes/sidebar.php";
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>44</h3>
+              <h3><?=$vote->read()->num_rows ?></h3>
 
               <p>Votes</p>
             </div>
@@ -85,14 +94,14 @@ include "includes/sidebar.php";
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>65</h3>
+              <h3><?=$message->read()->num_rows ?></h3>
 
               <p>Messages</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="messages.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
