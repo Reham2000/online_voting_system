@@ -22,6 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $user->setId($result->id)->updateColumn('status',0);
             }
             $_SESSION['user'] = $result;
+            if($_SESSION['user']->photo == ''){
+                $_SESSION['user']->photo = "default.png";
+            }
             header("location:index.php");
             die;
         } else {

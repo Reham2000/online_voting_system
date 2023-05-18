@@ -8,7 +8,6 @@ include "templates/navbar.php";
 
 $message = new Message; 
 $messages = $message->setUser_id($_SESSION['user']->id)->read()->fetch_all();
-// print_r($messages);die;
 if(isset($_GET['delete']) && is_numeric($_GET['delete']))
 {
     $message->setId($_GET['delete']);

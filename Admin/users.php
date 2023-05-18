@@ -5,10 +5,34 @@ include "includes/navbar.php";
 include "includes/sidebar.php";
 
 use App\Database\Models\User;
+use App\Database\Models\Vote;
+use App\Database\Models\Message;
+use App\Database\Models\Users_votes;
 
 $user = new User;
+$vote = new Vote;
+$message = new Message;
+$user_vote = new Users_votes;
 $users = $user->read()->fetch_all();
-
+if(isset($_GET['delete']) && is_numeric($_GET['delete'])){
+  // delete messages
+  $messages = $message->setUser_id($_GET['delete'])->getMessagesByUserId()->fetch_array();
+  foreach ($messages as $messageDate) {
+    $message->setId($messageDate[0])->delete();
+  }
+  // delete votes
+  $votes = $vote->setUser_id($_GET['delete'])->getAllVotesByUserId()->fetch_array();
+  foreach ($votes as $voteData) {
+    $vote->setId($voteData[0])->delete();
+  }
+  // delete users votes data
+  $users_votes = $user_vote->setUserId($_GET['delete'])->getAllUserVotes()->fetch_array();
+  foreach ($users_votes as $user_voteData) {
+    $vote->setId($user_voteData[0])->delete();
+  }
+  $user->setId($_GET['delete'])->delete();
+  header("location:votes.php");die;
+}
 
 ?>
 
@@ -69,7 +93,7 @@ $users = $user->read()->fetch_all();
                           <td><?= $userData[0] ?></td>
                           <td><?= $userData[1] ?></td>
                           <td>0<?= $userData[2] ?></td>
-                          <td><img src="../layouts/images/users/<?= $userData[4]?>" alt="<?= $userData[1] ?>" class="w-25 h-25 rounded-circle"></td>
+                          <td><img src="<?= $usersImagesPath . $userData[4]?>" alt="<?= $userData[1] ?>" class="w-25 h-25 rounded-circle"></td>
                           <td>
                             <?php
                             if($userData[5] == 1){echo "Active";}

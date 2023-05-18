@@ -6,10 +6,7 @@ include "templates/header.php";
 include "App/Http/Middlewares/Auth.php";
 include "templates/navbar.php";
 
-// if(empty($_SESSION['user']->photo))
-// {
-//     $_SESSION['user']->photo = "default.png";
-// }
+
 $vote = new Vote;
 $votes = $vote->setUser_id($_SESSION['user']->id)->getAllVotesByUserId()->fetch_all();
 
@@ -19,7 +16,7 @@ $votes = $vote->setUser_id($_SESSION['user']->id)->getAllVotesByUserId()->fetch_
     <div class="row">
         <div class="col-md-3 col-sm-8 shadow px-3 text-center py-5 position-fixed vh-100">
             <div class="profile-img d-flex justify-content-center mt-5">
-                <img draggable=false src="layouts/images/users/<?= $_SESSION['user']->photo ?>" alt="women"
+                <img draggable=false src="<?=$usersImagesPath . $_SESSION['user']->photo ?>" alt="women"
                     class="shadow">
             </div>
             <h3 class="fw-bolder text-center pt-3"><?= $_SESSION['user']->username ?></h3>
@@ -47,7 +44,7 @@ $votes = $vote->setUser_id($_SESSION['user']->id)->getAllVotesByUserId()->fetch_
                 ?>
                 <div class="col-lg-6 col-sm-12">
                     <div class="card">
-                        <img src="layouts/images/votes/<?= $singleVote[3] ?>" class="card-img-top" alt="...">
+                        <img src="<?=$votesImagesPath . $singleVote[3] ?>" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"><?= $singleVote[1] ?></h5>
                             <p class="card-text"><?= $singleVote[2][0] ?> <a

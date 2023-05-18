@@ -2,6 +2,7 @@
     ob_start();
     session_start();
     include "vendor/autoload.php";
+    include "init.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,8 +18,8 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
 
     <!-- CSS Links -->
-    <link rel="stylesheet" href="layouts/css/all.min.css">
-    <link rel="stylesheet" href="layouts/css/style.css">
+    <link rel="stylesheet" href="<?= $cssPath ?>all.min.css">
+    <link rel="stylesheet" href="<?= $cssPath ?>style.css">
     <!-- Fonts link -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Alkatra&family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">

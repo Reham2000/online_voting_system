@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user->setUsername($_POST['username'])->setPhone($_POST['phone'])->setPassword($_POST['password']);
         if($user->create())
         {
-            header("refresh: 5 ;url=login.php");die;
+            header("location:login.php");die;
         }
         else
         {
@@ -41,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
     }
-    // print_r($validation->getError('username'));
 }
 
 

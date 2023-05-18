@@ -73,7 +73,7 @@ if (isset($_GET['vote']) && is_numeric($_GET['vote'])) {
 ?>
 
 
-<section class="home bg-danger vh-100 d-flex justify-content-start align-items-center bg-img">
+<section class="home bg-info vh-100 d-flex justify-content-start align-items-center bg-img">
     <h1 class="font2 ms-5 ps-5 fs-8">Let’s Vote</h1>
 </section>
 <section class="votes py-5 ">
@@ -101,7 +101,7 @@ if (isset($_GET['vote']) && is_numeric($_GET['vote'])) {
                             <div class="alert alert-danger p-2 position-absolute w-100 text-center <?= $display ?>" role="alert">
                                 <?= $message[$singleVote[0]] ?? '' ?>
                             </div>
-                            <img src="layouts/images/votes/<?= $singleVote[3] ?>" class="card-img-top" alt="...">
+                            <img src="<?=$votesImagesPath . $singleVote[3] ?>" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title"><?= $singleVote[1] ?></h5>
                                 <p class="card-text"><?= $singleVote[2][0] ?> <a href="details.php?id=<?= $singleVote[0] ?>">More..</a></p>

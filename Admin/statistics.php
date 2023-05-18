@@ -36,13 +36,13 @@ $notRepliedNum = $message->notRepliedNum()->fetch_array();
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Dashboard</h1>
+          <h1 class="m-0">Statistics</h1>
         </div>
         <!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard</li>
+            <li class="breadcrumb-item active">Statistics</li>
           </ol>
         </div>
         <!-- /.col -->
@@ -113,19 +113,10 @@ $notRepliedNum = $message->notRepliedNum()->fetch_array();
       label: 'Like',
       data:  <?= json_encode($votesLike) ?>  ,
       backgroundColor: [
-        // 'rgba(75, 192, 192, 0.2)',
-        // 'rgba(54, 162, 235, 0.2)',
         'rgba(153, 102, 255, 0.2)',
-        // 'rgba(201, 203, 207, 0.2)'
       ],
       borderColor: [
-        // 'rgb(255, 99, 132)',
-        // 'rgb(255, 159, 64)',
-        // 'rgb(255, 205, 86)',
-        // 'rgb(75, 192, 192)',
-        // 'rgb(54, 162, 235)',
         'rgb(153, 102, 255)',
-        // 'rgb(201, 203, 207)'
       ],
       borderWidth: 2,
       hoverOffset: 4
@@ -134,21 +125,9 @@ $notRepliedNum = $message->notRepliedNum()->fetch_array();
       label: 'Dislike',
       data:  <?= json_encode($votesDislike) ?>,
       backgroundColor: [
-        // 'rgba(201, 203, 207, 0.2)',
-        // 'rgba(153, 102, 255, 0.2)',
-        // 'rgba(54, 162, 235, 0.2)',
-        // 'rgba(75, 192, 192, 0.2)',
-        // 'rgba(255, 205, 86, 0.2)',
-        // 'rgba(255, 159, 64, 0.2)',
         'rgba(255, 99, 132, 0.2)',
       ],
       borderColor: [
-        // 'rgb(201, 203, 207)',
-        // 'rgb(153, 102, 255)',
-        // 'rgb(54, 162, 235)',
-        // 'rgb(75, 192, 192)',
-        // 'rgb(255, 159, 64)',
-        // 'rgb(255, 205, 86)',
         'rgb(255, 99, 132)',
       ],
 

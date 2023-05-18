@@ -42,6 +42,14 @@ class Message extends Model implements Crud
     $stmt->execute();
     return $stmt->get_result();
   }
+  public function getMessagesByUserId()
+  {
+    $query = "SELECT * FROM `messages` WHERE `user_id` = ?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param('i',$this->user_id);
+    $stmt->execute();
+    return $stmt->get_result();
+  }
   public function reply()
   {
     $query = "UPDATE `messages` SET `reply` = ?, `reply_at` = ?,`admin_id` = ? WHERE `id` = ?";

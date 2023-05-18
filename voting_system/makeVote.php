@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <section class="messages py-5 container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-5 col-sm-10 p-3 mt-5">
-            <img src="layouts/images/vote2.png" alt="" class="w-100 h-100">
+            <img src="<?= $imagesPath ?>vote2.png" alt="" class="w-100 h-100">
         </div>
         <form action="" method="POST" class="col-sm-7 p-3 " enctype="multipart/form-data">
             <h2 class="text-center col-12 pt-5  pb-3"><?= $main ?> A Vote</h2>

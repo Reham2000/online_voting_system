@@ -82,7 +82,7 @@ class Validation
     }
     /**
      * Get the value of changed
-     */ 
+     */
     public function getChanged()
     {
         return $this->changed;
@@ -178,11 +178,7 @@ class Validation
         return $this;
     }
 
-    
+
 }
 
 
-
-// $validation = new Validation;
-// $validation->setInput('firstname')->setValue('')->required()->min(2)->max(8);
-// print_r($validation->getErrors());

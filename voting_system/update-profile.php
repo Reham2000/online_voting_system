@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <div class="col-md-6 col-sm-12 p-3 pt-5 mt-5 shadow position-relative">
                 <div class="position-absolute updeted_img">
                     <div class="profile-img">
-                        <img draggable=false src="layouts/images/users/<?= $_SESSION['user']->photo ?>" alt="women" class="shadow">
+                        <img draggable=false src="<?= $usersImagesPath.$_SESSION['user']->photo ?>" alt="women" class="shadow">
                     </div>
                 </div>
                 <form action="" method="POST" enctype="multipart/form-data" class="col-sm-11 mt-5 ">

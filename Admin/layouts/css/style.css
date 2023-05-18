@@ -3,7 +3,16 @@ body {
   /* overflow: scroll; */
   font-family: 'Courgette', cursive;
 }
+.signupLogo{
+  background-image: url(../../images/vote.jpg);
+  background-size: cover;
+}
 .userImg{
   max-width: 100px !important;
   max-height: 100px !important;
 }
+
+.card img{
+    max-height: 250px !important;
+}
+

@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       <!-- <div class="row shadow"> -->
       <div class="row">
         <div class="col-4 page_logo text-center w-25 m-auto">
-          <img src="images/add_user.png" class="rounded-circle" alt="Add Admin">
+          <img src="<?= $imagesPath ?>add_user.png" class="rounded-circle" alt="Add Admin">
         </div>
         <?php
         if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
